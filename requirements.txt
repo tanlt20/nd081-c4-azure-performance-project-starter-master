@@ -32,5 +32,11 @@ pyparsing==2.4.7
 pytz==2021.1
 regex==2021.8.21
 requests==2.26.0
+rsa==4.7.2
+six==1.16.0
+tomli==1.2.1
+urllib3==1.26.6
+wrapt==1.12.1
+werkzeug==2.0.3
 
 
