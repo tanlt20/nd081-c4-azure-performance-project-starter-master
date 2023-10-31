@@ -24,23 +24,23 @@ from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 
 # Logging
 logger = logging.getLogger(__name__)
-handler = AzureLogHandler(connection_string='InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e')
-eventHandler = AzureEventHandler(connection_string='InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e')
+handler = AzureLogHandler(connection_string='InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://westus.livediagnostics.monitor.azure.com/')
+eventHandler = AzureEventHandler(connection_string='InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://westus.livediagnostics.monitor.azure.com/')
 logger.addHandler(handler)
 logger.addHandler(eventHandler)
 logger.setLevel(logging.INFO)
 
 # Metrics
-exporter = metrics_exporter.new_metrics_exporter(enable_standard_metrics=True, connection_string='InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e')
+exporter = metrics_exporter.new_metrics_exporter(enable_standard_metrics=True, connection_string='InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://westus.livediagnostics.monitor.azure.com/')
 
 # Tracing
 tracer = Tracer(
-    exporter=AzureExporter(connection_string='InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e'), sampler=ProbabilitySampler(1.0),)
+    exporter=AzureExporter(connection_string='InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://westus.livediagnostics.monitor.azure.com/'), sampler=ProbabilitySampler(1.0),)
 
 app = Flask(__name__)
 
 # Requests
-middleware = FlaskMiddleware(app, exporter=AzureExporter(connection_string="InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e"), sampler=ProbabilitySampler(rate=1.0),)
+middleware = FlaskMiddleware(app, exporter=AzureExporter(connection_string="InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://westus.livediagnostics.monitor.azure.com/"), sampler=ProbabilitySampler(rate=1.0),)
 
 # Load configurations from environment or config file
 app.config.from_pyfile('config_file.cfg')
