@@ -16,6 +16,7 @@ from opencensus.tags import tag_map as tag_map_module
 from opencensus.trace.samplers import ProbabilitySampler
 from opencensus.trace.tracer import Tracer
 from opencensus.ext.azure.log_exporter import AzureLogHandler
+from opencensus.ext.azure.log_exporter import AzureEventHandler
 from opencensus.ext.azure import metrics_exporter
 from opencensus.ext.azure.trace_exporter import AzureExporter
 from opencensus.ext.flask.flask_middleware import FlaskMiddleware
@@ -24,7 +25,9 @@ from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 # Logging
 logger = logging.getLogger(__name__)
 handler = AzureLogHandler(connection_string='InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e')
+eventHandler = AzureEventHandler(connection_string='InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e')
 logger.addHandler(handler)
+logger.addHandler(eventHandler)
 logger.setLevel(logging.INFO)
 
 # Metrics
