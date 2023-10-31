@@ -23,21 +23,21 @@ from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 
 # Logging
 logger = logging.getLogger(__name__)
-handler = AzureLogHandler(connection_string='InstrumentationKey=4dd8b658-8d31-47df-8dfe-b1f1a5ff6eb6;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://westus.livediagnostics.monitor.azure.com/')
+handler = AzureLogHandler(connection_string='InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e')
 logger.addHandler(handler)
 logger.setLevel(logging.INFO)
 
 # Metrics
-exporter = metrics_exporter.new_metrics_exporter(enable_standard_metrics=True, connection_string='InstrumentationKey=4dd8b658-8d31-47df-8dfe-b1f1a5ff6eb6;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://westus.livediagnostics.monitor.azure.com/')
+exporter = metrics_exporter.new_metrics_exporter(enable_standard_metrics=True, connection_string='InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e')
 
 # Tracing
 tracer = Tracer(
-    exporter=AzureExporter(connection_string='InstrumentationKey=4dd8b658-8d31-47df-8dfe-b1f1a5ff6eb6;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://westus.livediagnostics.monitor.azure.com/'), sampler=ProbabilitySampler(1.0),)
+    exporter=AzureExporter(connection_string='InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e'), sampler=ProbabilitySampler(1.0),)
 
 app = Flask(__name__)
 
 # Requests
-middleware = FlaskMiddleware(app, exporter=AzureExporter(connection_string="InstrumentationKey=4dd8b658-8d31-47df-8dfe-b1f1a5ff6eb6;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://westus.livediagnostics.monitor.azure.com/"), sampler=ProbabilitySampler(rate=1.0),)
+middleware = FlaskMiddleware(app, exporter=AzureExporter(connection_string="InstrumentationKey=553ca388-1d9c-4a75-8426-6b403fb1a68e"), sampler=ProbabilitySampler(rate=1.0),)
 
 # Load configurations from environment or config file
 app.config.from_pyfile('config_file.cfg')
