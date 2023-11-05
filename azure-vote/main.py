@@ -60,8 +60,6 @@ if ("TITLE" in os.environ and os.environ['TITLE']):
 else:
     title = app.config['TITLE']
 
-redis_server = os.environ['REDIS']
-
 # Redis Connection
 r = redis.Redis()
 
